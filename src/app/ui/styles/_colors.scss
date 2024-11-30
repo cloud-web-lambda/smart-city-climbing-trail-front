@@ -1,0 +1,62 @@
+:root {
+	// 주요 색상
+	--c-primary: #4caf50;
+	--c-secondary: #795548;
+	--c-accent: #ff9800;
+
+	// 배경 색상
+	--c-bg-light: #f1f8e9;
+	--c-bg-dark: #33691e;
+
+	// 텍스트 색상
+	--c-text-light: #ffffff;
+	--c-text-dark: #212121;
+
+	// 산 관련 색상
+	--c-mountain-peak: #bdbdbd;
+	--c-mountain-slope: #8d6e63;
+	--c-mountain-forest: #2e7d32;
+
+	// 트레일 관련 색상
+	--c-trail-easy: #81c784;
+	--c-trail-moderate: #ffa000;
+	--c-trail-difficult: #d32f2f;
+
+	// 자연 요소 색상
+	--c-sky: #64b5f6;
+	--c-water: #4fc3f7;
+	--c-grass: #7cb342;
+	--c-rock: #757575;
+
+	// 경고 및 알림 색상
+	--c-warning: #ffc107;
+	--c-danger: #f44336;
+	--c-success: #4caf50;
+	--c-info: #2196f3;
+
+	// 그라데이션 색상 (산 높이에 따른)
+	--c-elevation-low: #c8e6c9;
+	--c-elevation-mid: #81c784;
+	--c-elevation-high: #4caf50;
+
+	// 계절별 색상
+	--c-spring: #8bc34a;
+	--c-summer: #4caf50;
+	--c-autumn: #ff9800;
+	--c-winter: #eceff1;
+
+	--c-g-neutral-99: #f7f7f7;
+	--c-g-neutral-95: #dcdcdc;
+	--c-g-neutral-90: #c4c4c4;
+	--c-g-neutral-80: #b0b0b0;
+	--c-g-neutral-70: #9b9b9b;
+	--c-g-neutral-60: #8a8a8a;
+	--c-g-neutral-50: #737373;
+	--c-g-neutral-40: #5c5c5c;
+	--c-g-neutral-30: #474747;
+	--c-g-neutral-22: #303030;
+	--c-g-neutral-20: #2a2a2a;
+	--c-g-neutral-15: #1c1c1c;
+	--c-g-neutral-10: #171717;
+	--c-g-neutral-5: #0f0f0f;
+}

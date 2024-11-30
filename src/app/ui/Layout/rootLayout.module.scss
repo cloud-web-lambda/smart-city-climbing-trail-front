@@ -1,0 +1,10 @@
+@use "@/shared/ui/styles/constants" as c;
+@use "@/shared/ui/styles/mixins" as m;
+
+.wrapper {
+	width: 100%;
+	max-width: c.$S_MOBILE_WIDTH;
+	margin: auto;
+	background-color: var(--c-bg-light);
+	box-shadow: 0 4px 8px var(--c-g-neutral-90);
+}
