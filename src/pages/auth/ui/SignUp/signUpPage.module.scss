@@ -1,0 +1,41 @@
+@use "@/shared/ui/styles/mixins" as m;
+
+.wrapper {
+	@include m.flex(center, center, column);
+	width: 100%;
+	padding: 24px 12px;
+	overflow-y: scroll;
+
+	.mountain {
+		width: 200px;
+		height: 200px;
+		object-fit: contain;
+	}
+
+	.title {
+		@include m.fontHeading1("medium");
+		margin-bottom: 12px;
+		color: var(--c-text-dark);
+	}
+
+	.text {
+		@include m.fontHeadline2("regular");
+		margin-bottom: 24px;
+		color: var(--c-text-dark);
+	}
+
+	.form {
+		@include m.flex(flex-start, center, column);
+		gap: 24px;
+		width: 100%;
+		max-width: 500px;
+
+		.input {
+			width: 100%;
+		}
+
+		.loginButton {
+			margin-top: 24px;
+		}
+	}
+}

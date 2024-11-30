@@ -1,0 +1,10 @@
+@use "@/shared/ui/styles/mixins" as m;
+
+.wrapper.required {
+	&::after {
+		@include m.fontLabel1Normal;
+		margin-left: 0.25rem;
+		color: inherit;
+		content: "*";
+	}
+}

@@ -1,1 +1,1 @@
-export { convertDvhToPx } from "./styles";
+export { convertDvhToPx, getRootStyles, getSemanticColor } from "./styles";

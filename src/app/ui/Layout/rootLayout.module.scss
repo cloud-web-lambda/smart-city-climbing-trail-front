@@ -2,6 +2,7 @@
 @use "@/shared/ui/styles/mixins" as m;
 
 .wrapper {
+	position: relative;
 	width: 100%;
 	max-width: c.$S_MOBILE_WIDTH;
 	margin: auto;

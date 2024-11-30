@@ -1,0 +1,139 @@
+@use "@/shared/ui/styles/constants" as c;
+@use "@/shared/ui/styles/mixins" as m;
+@use "sass:math";
+
+$CLEAR_BUTTON_SIZE: 16px;
+$CLEAR_BUTTON_LINE_WIDTH: calc(1px * math.sqrt(2));
+$CLEAR_BUTTON_LINE_HEIGHT: calc(10px * math.sqrt(2));
+
+.wrapper {
+	@include m.flex(flex-start, flex-start, column);
+	@include m.fontLabel1Normal("medium");
+	gap: 8px;
+	color: var(--c-text-dark);
+
+	.inputWrapper {
+		position: relative;
+		width: 100%;
+
+		.input {
+			@include m.fontLabel1Normal("regular");
+			display: inline-block;
+			width: 100%;
+			padding: 10px 42px 10px 16px;
+			color: var(--c-text-dark);
+			background-color: var(--c-g-neutral-99);
+			border: 1px solid var(--c-mountain-peak);
+			border-radius: 8px;
+
+			&:read-only {
+				cursor: default;
+				background-color: transparent;
+			}
+
+			&::placeholder {
+				color: var(--c-text-dark);
+				opacity: 0.35;
+			}
+		}
+
+		.clearButton {
+			@include m.absolute(50% 10px auto auto);
+			width: $CLEAR_BUTTON_SIZE;
+			height: $CLEAR_BUTTON_SIZE;
+			transform: translate(-50%, -50%);
+
+			&::before {
+				@include m.absolute(50% 50% auto auto);
+				width: $CLEAR_BUTTON_LINE_WIDTH;
+				height: $CLEAR_BUTTON_LINE_HEIGHT;
+				cursor: pointer;
+				content: "";
+				background-color: var(--c-text-dark);
+				border-radius: 4px;
+				transform: translate(-50%, -50%) rotate(45deg);
+			}
+
+			&::after {
+				@include m.absolute(50% 50% auto auto);
+				width: $CLEAR_BUTTON_LINE_WIDTH;
+				height: $CLEAR_BUTTON_LINE_HEIGHT;
+				cursor: pointer;
+				content: "";
+				background-color: var(--c-text-dark);
+				border-radius: 4px;
+				transform: translate(-50%, -50%) rotate(-45deg);
+			}
+		}
+
+		&:has(.input:placeholder-shown) .clearButton {
+			display: none;
+		}
+	}
+
+	.errorMessage {
+		@include m.fontCaption1("regular");
+		color: var(--c-label-alternative);
+		white-space: pre-wrap;
+	}
+
+	&[aria-disabled="true"] {
+		color: var(--c-label-assistive);
+		cursor: not-allowed;
+
+		.inputWrapper {
+			cursor: inherit;
+
+			.input {
+				color: var(--c-rock);
+				cursor: inherit;
+				background-color: var(--c-g-neutral-95);
+				border-color: var(--c-mountain-peak);
+			}
+
+			.clearButton {
+				cursor: inherit;
+
+				&::before,
+				&::after {
+					cursor: inherit;
+					background-color: var(--c-rock);
+				}
+			}
+		}
+	}
+
+	&.small {
+		@include m.fontLabel2("medium");
+
+		.input {
+			@include m.fontLabel2("regular");
+			padding-top: 8px;
+			padding-bottom: 8px;
+		}
+
+		.errorMessage {
+			@include m.fontCaption2("regular");
+		}
+	}
+
+	&.isError {
+		.inputWrapper {
+			.input {
+				color: var(--c-danger);
+				border-color: var(--c-danger);
+			}
+
+			.clearButton {
+				&::before,
+				&::after {
+					background-color: var(--c-danger);
+				}
+			}
+		}
+
+		.errorMessage {
+			color: var(--c-danger);
+		}
+	}
+}

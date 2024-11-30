@@ -1,0 +1,73 @@
+@use "@/shared/ui/styles/constants" as c;
+@use "@/shared/ui/styles/mixins" as m;
+
+.wrapper {
+	@include m.fontBody1Normal("medium");
+	position: relative;
+	padding: 10px 20px;
+	cursor: pointer;
+	border-radius: 4px;
+
+	&:disabled {
+		cursor: not-allowed;
+		opacity: 0.6;
+	}
+
+	&.primary {
+		color: var(--c-text-light);
+		background-color: var(--c-primary);
+		border: none;
+
+		&:disabled {
+			background-color: var(--c-g-neutral-70);
+		}
+	}
+
+	&.secondary {
+		color: var(--c-primary);
+		background-color: transparent;
+		border: 2px solid var(--c-primary);
+
+		&:disabled {
+			color: var(--c-g-neutral-70);
+			border-color: var(--c-g-neutral-70);
+		}
+	}
+
+	&.tertiary {
+		padding: 0;
+		color: var(--c-primary);
+		background-color: transparent;
+		border: none;
+
+		&:disabled {
+			color: var(--c-g-neutral-70);
+		}
+	}
+
+	&.outlined {
+		color: var(--c-text-dark);
+		background-color: transparent;
+		border: 1px solid var(--c-g-neutral-60);
+
+		&:disabled {
+			color: var(--c-g-neutral-70);
+			border-color: var(--c-g-neutral-70);
+		}
+	}
+
+	&.gray {
+		color: var(--c-text-dark);
+		background-color: var(--c-g-neutral-95);
+		border: none;
+
+		&:disabled {
+			color: var(--c-g-neutral-70);
+			background-color: var(--c-g-neutral-95);
+		}
+	}
+
+	&.full {
+		width: 100%;
+	}
+}
