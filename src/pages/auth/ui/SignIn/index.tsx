@@ -16,11 +16,11 @@ const SignInPage: React.FC = () => {
 				<form onSubmit={(e) => e.preventDefault()} className={styles.form}>
 					<Input required size="medium" label="이메일" className={styles.input} placeholder="이메일을 입력하세요" />
 					<Input required size="medium" label="비밀번호" className={styles.input} placeholder="비밀번호를 입력하세요" />
-					<Button type="submit" buttonType="primary" full className={styles.loginButton}>
+					<Button type="submit" buttonType="primary" full className={styles.signInButton}>
 						로그인
 					</Button>
-					<Link className={styles.signUpLink} to="/auth/sign-up">
-						<Button buttonType="tertiary" className={styles.signUpLink} type="button">
+					<Link to="/auth/sign-up">
+						<Button buttonType="tertiary" type="button">
 							회원가입 하러 가기
 						</Button>
 					</Link>

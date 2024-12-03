@@ -1,0 +1,17 @@
+@use "@/shared/ui/styles/constants" as c;
+@use "@/shared/ui/styles/mixins" as m;
+
+.wrapper {
+	@include m.flex(flex-start, center, column);
+	gap: 24px;
+	width: 100%;
+	max-width: 500px;
+
+	.input {
+		width: 100%;
+	}
+
+	.confirmButton {
+		margin-top: 24px;
+	}
+}

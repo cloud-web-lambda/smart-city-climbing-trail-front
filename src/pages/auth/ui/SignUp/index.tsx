@@ -1,8 +1,10 @@
-import { type MouseEventHandler, useRef } from "react";
+import { type MouseEventHandler, useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link } from "@tanstack/react-router";
 import { type SubmitHandler, useForm } from "react-hook-form";
+
+import VerificationCode from "@/pages/auth/ui/SignUp/VerificationCode";
 
 import { useSignUpMutation } from "@/features/auth";
 
@@ -14,9 +16,8 @@ import { DvhMinHeightLayout } from "@/shared/ui/Layout";
 
 import styles from "./signUpPage.module.scss";
 
-// TODO: 인증번호 관련 로직 분리 필요해보임
 const SignUpPage: React.FC = () => {
-	const subRef = useRef<string | null>(null);
+	const [sub, setSub] = useState("");
 
 	const {
 		register,
@@ -38,7 +39,7 @@ const SignUpPage: React.FC = () => {
 	const onSubmit: SubmitHandler<SignUpSchema> = async (data) => {
 		if (disabled) return;
 		const { sub } = await signUp(data);
-		subRef.current = sub;
+		setSub(sub);
 	};
 
 	return (
@@ -80,18 +81,9 @@ const SignUpPage: React.FC = () => {
 							회원가입
 						</Button>
 					)}
-					{isSubmitSuccessful && (
-						<Input
-							required
-							size="medium"
-							label="인증코드"
-							placeholder="메일로 전송 된 인증코드 6자리를 입력하세요."
-							type="number"
-							className={styles.input}
-						/>
-					)}
-					<Link className={styles.signUpLink} to="/auth">
-						<Button buttonType="tertiary" className={styles.signUpLink} type="button">
+					<VerificationCode sub={sub} />
+					<Link to="/auth">
+						<Button buttonType="tertiary" type="button">
 							로그인 하러 가기
 						</Button>
 					</Link>
