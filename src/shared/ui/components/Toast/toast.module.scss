@@ -1,0 +1,97 @@
+@use "@/shared/ui/styles/constants" as c;
+@use "@/shared/ui/styles/mixins" as m;
+
+$SPACE: 12px;
+
+.wrapper {
+	@include m.fixed(auto auto 40px 50%);
+	z-index: c.$Z_TOAST;
+	transform: translateX(-50%);
+
+	.transitionGroup {
+		@include m.flex(flex-start, flex-start, column);
+		width: 100%;
+		min-width: 320px;
+		max-width: 800px;
+		transition: all 0.3s;
+
+		.toast {
+			@include m.flex(flex-start);
+			width: 100%;
+			padding: 20px 20px 20px 24px;
+			pointer-events: none;
+			background-color: var(--c-g-neutral-99);
+			border: 1px solid var(--c-elevation-high);
+			border-radius: 2px;
+			box-shadow: var(--c-shadow-emphasize);
+			opacity: 0;
+			transition: all 0.2s;
+			transform: scale(0.8);
+
+			.icon {
+				margin-right: 8px;
+			}
+
+			.text {
+				@include m.fontBody1Normal("regular");
+				@include m.makeEllipsis(2);
+				flex: 1;
+				padding-right: 20px;
+			}
+
+			& + .toast {
+				margin-top: $SPACE;
+			}
+
+			&:is(.neutral, .informative) {
+				.icon path {
+					stroke: var(--c-g-neutral-10);
+				}
+
+				.text {
+					color: var(--c-g-neutral-10);
+				}
+			}
+
+			&.negative {
+				.icon path {
+					stroke: var(--c-danger);
+				}
+
+				.text {
+					color: var(--c-danger);
+				}
+			}
+
+			&.positive {
+				.icon path {
+					stroke: var(--c-mountain-forest);
+				}
+
+				.text {
+					color: var(--c-mountain-forest);
+				}
+			}
+
+			&:last-child:where(.enterDone, .exit) {
+				opacity: 1;
+				transform: scale(1);
+			}
+
+			&:nth-last-child(2):where(.enterDone, .exit) {
+				opacity: 0.8;
+				transform: scale(1);
+			}
+
+			&:nth-last-child(3):where(.enterDone, .exit) {
+				opacity: 0.4;
+				transform: scale(1);
+			}
+
+			&:is(.enter, .exitActive) {
+				opacity: 0;
+				transform: scale(0.8);
+			}
+		}
+	}
+}

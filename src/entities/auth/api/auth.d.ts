@@ -3,9 +3,18 @@ export interface RequestSignUpDTO {
 	password: string;
 }
 
+export interface RequestSignInDTO extends RequestSignUpDTO {}
+
 export interface SignUpDTO {
 	message: string;
 	sub: string;
+}
+
+export interface SignInDTO {
+	message: string;
+	idToken: string;
+	accessToken: string;
+	refreshToken: string;
 }
 
 export interface RequestConfirmCodeDTO {

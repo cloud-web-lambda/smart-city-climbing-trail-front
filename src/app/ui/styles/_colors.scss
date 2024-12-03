@@ -59,4 +59,9 @@
 	--c-g-neutral-15: #1c1c1c;
 	--c-g-neutral-10: #171717;
 	--c-g-neutral-5: #0f0f0f;
+
+	--c-shadow-normal: 0px 1px 2px rgba(0, 0, 0, 12%), 0px 0px 1px rgba(0, 0, 0, 8%), 0px 0px 1px rgba(0, 0, 0, 8%);
+	--c-shadow-emphasize: 0px 2px 8px rgba(0, 0, 0, 12%), 0px 1px 4px rgba(0, 0, 0, 8%), 0px 0px 1px rgba(0, 0, 0, 8%);
+	--c-shadow-strong: 0px 6px 12px rgba(0, 0, 0, 12%), 0px 4px 8px rgba(0, 0, 0, 8%), 0px 0px 4px rgba(0, 0, 0, 8%);
+	--c-shadow-heavy: 0px 16px 20px rgba(0, 0, 0, 12%), 0px 8px 16px rgba(0, 0, 0, 8%), 0px 0px 8px rgba(0, 0, 0, 8%);
 }

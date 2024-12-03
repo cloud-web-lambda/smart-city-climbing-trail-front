@@ -1,1 +1,1 @@
-export { apiClient } from "./apiClient";
+export { apiClient, getKyHTTPError, isKyHTTPError } from "./apiClient";

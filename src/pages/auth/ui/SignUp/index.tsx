@@ -26,7 +26,7 @@ const SignUpPage: React.FC = () => {
 		formState: { isSubmitting, errors, disabled, isSubmitSuccessful },
 	} = useForm<SignUpSchema>({
 		resolver: zodResolver(signUpSchema),
-		mode: "onTouched",
+		mode: "onChange",
 	});
 
 	const { mutateAsync: signUp } = useSignUpMutation();
@@ -76,13 +76,13 @@ const SignUpPage: React.FC = () => {
 						autoComplete="new-password"
 						{...register("password")}
 					/>
-					{!isSubmitSuccessful && (
-						<Button type="submit" buttonType="primary" full className={styles.loginButton} disabled={isSubmitting}>
+					{!sub && (
+						<Button type="submit" buttonType="primary" full className={styles.signUpButton} disabled={isSubmitting}>
 							회원가입
 						</Button>
 					)}
 				</form>
-				<VerificationCode sub={sub} />
+				{sub && <VerificationCode sub={sub} />}
 				<Link to="/auth" className={styles.link}>
 					<Button buttonType="tertiary" type="button">
 						로그인 하러 가기

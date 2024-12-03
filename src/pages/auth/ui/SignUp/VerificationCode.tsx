@@ -5,7 +5,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 
 import { useConfirmCodeMutation } from "@/features/auth";
 
-import { confirmCodeSchema, ConfirmCodeSchema } from "@/entities/auth/model/confirmCodeSchema";
+import { confirmCodeSchema, ConfirmCodeSchema } from "@/entities/auth/model";
 
 import { Button, Input } from "@/shared/ui/components";
 
@@ -38,8 +38,6 @@ const VerificationCode: React.FC<Props> = ({ sub }) => {
 		setValue("sub", sub);
 	}, [setValue, sub]);
 
-	if (!sub) return;
-
 	return (
 		<form className={styles.wrapper} onSubmit={handleSubmit(onSubmit)}>
 			<Input
@@ -54,7 +52,7 @@ const VerificationCode: React.FC<Props> = ({ sub }) => {
 				{...register("confirmationCode")}
 			/>
 			<Button buttonType="primary" type="submit" className={styles.confirmButton} full disabled={isSubmitting}>
-				인증
+				인증하기
 			</Button>
 		</form>
 	);

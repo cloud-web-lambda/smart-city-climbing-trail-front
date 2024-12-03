@@ -1,15 +1,20 @@
+import { Suspense } from "react";
+
 import { createRootRoute, Outlet } from "@tanstack/react-router";
 
 import { RootLayout } from "@/app/ui/Layout";
 
-export const Route = createRootRoute({
-	component: RootComponent,
-});
+import { Toast } from "@/shared/ui/components";
 
-function RootComponent() {
-	return (
-		<RootLayout>
-			<Outlet />
-		</RootLayout>
-	);
-}
+export const Route = createRootRoute({
+	component: () => (
+		<>
+			<RootLayout>
+				<Outlet />
+			</RootLayout>
+			<Suspense fallback={null}>
+				<Toast />
+			</Suspense>
+		</>
+	),
+});
