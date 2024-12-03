@@ -81,13 +81,13 @@ const SignUpPage: React.FC = () => {
 							회원가입
 						</Button>
 					)}
-					<VerificationCode sub={sub} />
-					<Link to="/auth">
-						<Button buttonType="tertiary" type="button">
-							로그인 하러 가기
-						</Button>
-					</Link>
 				</form>
+				<VerificationCode sub={sub} />
+				<Link to="/auth" className={styles.link}>
+					<Button buttonType="tertiary" type="button">
+						로그인 하러 가기
+					</Button>
+				</Link>
 			</DvhMinHeightLayout>
 		</main>
 	);

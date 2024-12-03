@@ -53,7 +53,7 @@ const VerificationCode: React.FC<Props> = ({ sub }) => {
 				errorMessage={errors.confirmationCode?.message}
 				{...register("confirmationCode")}
 			/>
-			<Button buttonType="primary" type="submit" className={styles.confirmButton}>
+			<Button buttonType="primary" type="submit" className={styles.confirmButton} full disabled={isSubmitting}>
 				인증
 			</Button>
 		</form>
