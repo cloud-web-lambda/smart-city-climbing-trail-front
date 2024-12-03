@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { useConfirmCodeMutation } from "@/features/auth";
+import { useConfirmCodeMutation } from "@/features/auth/api";
 
 import { confirmCodeSchema, ConfirmCodeSchema } from "@/entities/auth/model";
 

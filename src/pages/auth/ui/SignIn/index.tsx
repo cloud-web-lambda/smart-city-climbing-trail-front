@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Link } from "@tanstack/react-router";
 import { type SubmitHandler, useForm } from "react-hook-form";
 
-import { useSignInMutation } from "@/features/auth";
+import { useSignInMutation } from "@/features/auth/api";
 
 import { signInSchema, SignInSchema } from "@/entities/auth/model";
 

@@ -6,7 +6,7 @@ import { type SubmitHandler, useForm } from "react-hook-form";
 
 import VerificationCode from "@/pages/auth/ui/SignUp/VerificationCode";
 
-import { useSignUpMutation } from "@/features/auth";
+import { useSignUpMutation } from "@/features/auth/api";
 
 import { signUpSchema, type SignUpSchema } from "@/entities/auth/model";
 
