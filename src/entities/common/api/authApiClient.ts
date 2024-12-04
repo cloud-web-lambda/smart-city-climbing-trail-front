@@ -1,7 +1,11 @@
 import ky from "ky";
 
 import type { RefreshDTO } from "@/entities/auth/api";
-import { TOKEN_EXPIRED_EVENT_NAME, TOKEN_EXPIRED_HTTP_MESSAGE } from "@/entities/users/constants";
+import {
+	TOKEN_EXPIRED_EVENT_NAME,
+	TOKEN_EXPIRED_HTTP_MESSAGE,
+	TOKEN_EXPIRED_HTTP_STATUS,
+} from "@/entities/users/constants";
 import { getAccessToken, getEmail, getTokens, removeTokens, setTokens } from "@/entities/users/lib";
 
 import { apiClient, getKyHTTPError, isKyHTTPError } from "@/shared/api";
@@ -27,8 +31,9 @@ export const authApiClient = apiClient.extend({
 		beforeError: [
 			async (error) => {
 				if (!isKyHTTPError(error)) return error;
+				const { status } = error.response;
 				const { message } = await getKyHTTPError(error);
-				if (message !== TOKEN_EXPIRED_HTTP_MESSAGE) return error;
+				if (status !== TOKEN_EXPIRED_HTTP_STATUS || message !== TOKEN_EXPIRED_HTTP_MESSAGE) return error;
 
 				try {
 					const { accessToken, refreshToken } = getTokens();

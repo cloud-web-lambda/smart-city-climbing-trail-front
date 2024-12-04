@@ -13,26 +13,32 @@ import { createFileRoute } from "@tanstack/react-router";
 // Import Routes
 
 import { Route as rootRoute } from "./app/routes/__root";
+import { Route as CommonRouteImport } from "./app/routes/_common/route";
 import { Route as AuthRouteImport } from "./app/routes/_auth/route";
 
 // Create Virtual Routes
 
-const IndexLazyImport = createFileRoute("/")();
+const CommonIndexLazyImport = createFileRoute("/_common/")();
 const AuthAuthIndexLazyImport = createFileRoute("/_auth/auth/")();
 const AuthAuthSignUpLazyImport = createFileRoute("/_auth/auth/sign-up")();
 
 // Create/Update Routes
+
+const CommonRouteRoute = CommonRouteImport.update({
+	id: "/_common",
+	getParentRoute: () => rootRoute,
+} as any);
 
 const AuthRouteRoute = AuthRouteImport.update({
 	id: "/_auth",
 	getParentRoute: () => rootRoute,
 } as any);
 
-const IndexLazyRoute = IndexLazyImport.update({
+const CommonIndexLazyRoute = CommonIndexLazyImport.update({
 	id: "/",
 	path: "/",
-	getParentRoute: () => rootRoute,
-} as any).lazy(() => import("./app/routes/index.lazy").then((d) => d.Route));
+	getParentRoute: () => CommonRouteRoute,
+} as any).lazy(() => import("./app/routes/_common/index.lazy").then((d) => d.Route));
 
 const AuthAuthIndexLazyRoute = AuthAuthIndexLazyImport.update({
 	id: "/auth/",
@@ -50,19 +56,26 @@ const AuthAuthSignUpLazyRoute = AuthAuthSignUpLazyImport.update({
 
 declare module "@tanstack/react-router" {
 	interface FileRoutesByPath {
-		"/": {
-			id: "/";
-			path: "/";
-			fullPath: "/";
-			preLoaderRoute: typeof IndexLazyImport;
-			parentRoute: typeof rootRoute;
-		};
 		"/_auth": {
 			id: "/_auth";
 			path: "";
 			fullPath: "";
 			preLoaderRoute: typeof AuthRouteImport;
 			parentRoute: typeof rootRoute;
+		};
+		"/_common": {
+			id: "/_common";
+			path: "";
+			fullPath: "";
+			preLoaderRoute: typeof CommonRouteImport;
+			parentRoute: typeof rootRoute;
+		};
+		"/_common/": {
+			id: "/_common/";
+			path: "/";
+			fullPath: "/";
+			preLoaderRoute: typeof CommonIndexLazyImport;
+			parentRoute: typeof CommonRouteImport;
 		};
 		"/_auth/auth/sign-up": {
 			id: "/_auth/auth/sign-up";
@@ -95,45 +108,56 @@ const AuthRouteRouteChildren: AuthRouteRouteChildren = {
 
 const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(AuthRouteRouteChildren);
 
+interface CommonRouteRouteChildren {
+	CommonIndexLazyRoute: typeof CommonIndexLazyRoute;
+}
+
+const CommonRouteRouteChildren: CommonRouteRouteChildren = {
+	CommonIndexLazyRoute: CommonIndexLazyRoute,
+};
+
+const CommonRouteRouteWithChildren = CommonRouteRoute._addFileChildren(CommonRouteRouteChildren);
+
 export interface FileRoutesByFullPath {
-	"/": typeof IndexLazyRoute;
-	"": typeof AuthRouteRouteWithChildren;
+	"": typeof CommonRouteRouteWithChildren;
+	"/": typeof CommonIndexLazyRoute;
 	"/auth/sign-up": typeof AuthAuthSignUpLazyRoute;
 	"/auth": typeof AuthAuthIndexLazyRoute;
 }
 
 export interface FileRoutesByTo {
-	"/": typeof IndexLazyRoute;
 	"": typeof AuthRouteRouteWithChildren;
+	"/": typeof CommonIndexLazyRoute;
 	"/auth/sign-up": typeof AuthAuthSignUpLazyRoute;
 	"/auth": typeof AuthAuthIndexLazyRoute;
 }
 
 export interface FileRoutesById {
 	__root__: typeof rootRoute;
-	"/": typeof IndexLazyRoute;
 	"/_auth": typeof AuthRouteRouteWithChildren;
+	"/_common": typeof CommonRouteRouteWithChildren;
+	"/_common/": typeof CommonIndexLazyRoute;
 	"/_auth/auth/sign-up": typeof AuthAuthSignUpLazyRoute;
 	"/_auth/auth/": typeof AuthAuthIndexLazyRoute;
 }
 
 export interface FileRouteTypes {
 	fileRoutesByFullPath: FileRoutesByFullPath;
-	fullPaths: "/" | "" | "/auth/sign-up" | "/auth";
+	fullPaths: "" | "/" | "/auth/sign-up" | "/auth";
 	fileRoutesByTo: FileRoutesByTo;
-	to: "/" | "" | "/auth/sign-up" | "/auth";
-	id: "__root__" | "/" | "/_auth" | "/_auth/auth/sign-up" | "/_auth/auth/";
+	to: "" | "/" | "/auth/sign-up" | "/auth";
+	id: "__root__" | "/_auth" | "/_common" | "/_common/" | "/_auth/auth/sign-up" | "/_auth/auth/";
 	fileRoutesById: FileRoutesById;
 }
 
 export interface RootRouteChildren {
-	IndexLazyRoute: typeof IndexLazyRoute;
 	AuthRouteRoute: typeof AuthRouteRouteWithChildren;
+	CommonRouteRoute: typeof CommonRouteRouteWithChildren;
 }
 
 const rootRouteChildren: RootRouteChildren = {
-	IndexLazyRoute: IndexLazyRoute,
 	AuthRouteRoute: AuthRouteRouteWithChildren,
+	CommonRouteRoute: CommonRouteRouteWithChildren,
 };
 
 export const routeTree = rootRoute._addFileChildren(rootRouteChildren)._addFileTypes<FileRouteTypes>();
@@ -144,12 +168,9 @@ export const routeTree = rootRoute._addFileChildren(rootRouteChildren)._addFileT
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/",
-        "/_auth"
+        "/_auth",
+        "/_common"
       ]
-    },
-    "/": {
-      "filePath": "index.lazy.tsx"
     },
     "/_auth": {
       "filePath": "_auth/route.tsx",
@@ -157,6 +178,16 @@ export const routeTree = rootRoute._addFileChildren(rootRouteChildren)._addFileT
         "/_auth/auth/sign-up",
         "/_auth/auth/"
       ]
+    },
+    "/_common": {
+      "filePath": "_common/route.tsx",
+      "children": [
+        "/_common/"
+      ]
+    },
+    "/_common/": {
+      "filePath": "_common/index.lazy.tsx",
+      "parent": "/_common"
     },
     "/_auth/auth/sign-up": {
       "filePath": "_auth/auth/sign-up.lazy.tsx",

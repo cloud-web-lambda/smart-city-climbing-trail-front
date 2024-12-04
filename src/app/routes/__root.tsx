@@ -2,6 +2,7 @@ import { Suspense } from "react";
 
 import { createRootRouteWithContext, Outlet } from "@tanstack/react-router";
 
+import { AuthHandler } from "@/app/Handlers";
 import { RootLayout } from "@/app/ui/Layout";
 
 import { queries } from "@/features/common";
@@ -20,6 +21,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 	},
 	component: () => (
 		<>
+			<AuthHandler />
 			<RootLayout>
 				<Outlet />
 			</RootLayout>
