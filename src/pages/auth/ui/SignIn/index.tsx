@@ -49,6 +49,7 @@ const SignInPage: React.FC = () => {
 						placeholder="이메일을 입력하세요"
 						type="email"
 						inputMode="email"
+						autoComplete="email"
 						disabled={isSubmitting}
 						onClickClear={onClickClear}
 						errorMessage={errors.email?.message}
@@ -61,6 +62,7 @@ const SignInPage: React.FC = () => {
 						className={styles.input}
 						placeholder="비밀번호를 입력하세요"
 						type="password"
+						autoComplete="current-password"
 						disabled={isSubmitting}
 						onClickClear={onClickClear}
 						errorMessage={errors.password?.message}

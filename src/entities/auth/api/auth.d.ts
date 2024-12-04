@@ -1,3 +1,5 @@
+import type { TokenDTO } from "@/entities/users/api";
+
 export interface RequestSignUpDTO {
 	email: string;
 	password: string;
@@ -10,11 +12,9 @@ export interface SignUpDTO {
 	sub: string;
 }
 
-export interface SignInDTO {
+export interface SignInDTO extends TokenDTO {
 	message: string;
 	idToken: string;
-	accessToken: string;
-	refreshToken: string;
 }
 
 export interface RequestConfirmCodeDTO {
@@ -36,3 +36,5 @@ export interface ConfirmCodeDTO {
 	message: string;
 	confirmResponse: ConfirmCodeResponse;
 }
+
+export interface RefreshDTO extends Omit<SignInDTO, "message"> {}
