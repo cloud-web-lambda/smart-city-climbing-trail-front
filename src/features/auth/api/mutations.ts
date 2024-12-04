@@ -1,7 +1,6 @@
-import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 
-import { queries } from "@/features/common";
+import { useMe } from "@/features/users/hooks";
 
 import { confirmCodeApi, signInApi, signUpApi } from "@/entities/auth/api";
 import { setEmail, setTokens } from "@/entities/users/lib";
@@ -10,9 +9,8 @@ import { useToastMutation } from "@/shared/hooks";
 
 /** 로그인 */
 export const useSignInMutation = () => {
-	const queryClient = useQueryClient();
+	const { refetchMe } = useMe();
 
-	// TODO: migrate getMe on tanstack router
 	return useToastMutation({
 		mutationFn: signInApi,
 		hasErrorToast: true,
@@ -21,7 +19,7 @@ export const useSignInMutation = () => {
 		onSuccess: async ({ accessToken, refreshToken }, { email }) => {
 			setTokens({ accessToken, refreshToken });
 			setEmail(email);
-			await queryClient.ensureQueryData(queries.users.getMe);
+			await refetchMe();
 		},
 	});
 };
