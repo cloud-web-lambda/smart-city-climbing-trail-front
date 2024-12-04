@@ -1,5 +1,6 @@
 import ky, { HTTPError } from "ky";
 
+import type { ErrorDTO } from "@/shared/api/common";
 import config from "@/shared/config";
 
 export const apiClient = ky.create({
@@ -7,10 +8,10 @@ export const apiClient = ky.create({
 	retry: 0,
 });
 
-export const isKyHTTPError = (error: unknown): error is HTTPError => {
+export const isKyHTTPError = (error: unknown): error is HTTPError<ErrorDTO> => {
 	return error instanceof HTTPError;
 };
 
-export const getKyHTTPError = async <T>(error: HTTPError) => {
-	return await error.response.json<T>();
+export const getKyHTTPError = async (error: HTTPError<ErrorDTO>) => {
+	return await error.response.json<ErrorDTO>();
 };

@@ -44,6 +44,8 @@ $SPACE: 12px;
 			}
 
 			&:is(.neutral, .informative) {
+				border-color: var(--c-g-neutral-10);
+
 				.icon path {
 					stroke: var(--c-g-neutral-10);
 				}
@@ -54,6 +56,8 @@ $SPACE: 12px;
 			}
 
 			&.negative {
+				border-color: var(--c-danger);
+
 				.icon path {
 					stroke: var(--c-danger);
 				}
