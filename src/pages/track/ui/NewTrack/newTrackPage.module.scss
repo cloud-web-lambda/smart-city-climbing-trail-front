@@ -20,4 +20,19 @@
 	.button {
 		margin-top: 40px;
 	}
+
+	.subwaySection {
+		width: 100%;
+		padding-top: 40px;
+
+		.subwayTitle {
+			@include m.fontHeadline2("semibold");
+			color: var(--c-g-neutral-20);
+		}
+
+		.station {
+			@include m.fontBody1Normal("regular");
+			color: var(--c-g-cool-neutral-22);
+		}
+	}
 }

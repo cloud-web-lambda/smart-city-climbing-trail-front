@@ -3,4 +3,30 @@
 
 .wrapper {
 	width: 100%;
+
+	.title {
+		@include m.fontHeading1("semibold");
+		margin-bottom: 12px;
+		color: var(--c-g-neutral-10);
+	}
+
+	.emailTitle {
+		@include m.fontHeadline2;
+		color: var(--c-g-neutral-20);
+	}
+
+	.email {
+		@include m.fontBody1Normal("regular");
+		margin-bottom: 40px;
+		color: var(--c-g-cool-neutral-22);
+	}
+
+	.logoutButton {
+		@include m.fontLabel1Normal("regular");
+		width: 100%;
+		padding: 12px 0;
+		text-align: left;
+		border-top: 1px solid var(--c-g-cool-neutral-60);
+		border-bottom: 1px solid var(--c-g-cool-neutral-60);
+	}
 }

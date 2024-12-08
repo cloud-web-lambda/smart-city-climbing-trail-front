@@ -8,7 +8,7 @@ const BottomNavigation: React.FC = () => {
 	return (
 		<footer className={styles.wrapper}>
 			<nav>
-				<Link className={styles.item}>
+				<Link to="/track" className={styles.item} activeProps={{ className: styles.active }}>
 					<IconArchive />
 					기록
 				</Link>

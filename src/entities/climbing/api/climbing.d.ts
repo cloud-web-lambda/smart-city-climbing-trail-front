@@ -35,3 +35,18 @@ export interface SaveClimbingTrackDTO extends RequestSaveClimbingTrackBody {
 	sub: string;
 	calories: number;
 }
+
+export interface TrackDTO {
+	totalHikingTime: number;
+	totalDistance: number;
+	totalCalories: number;
+	averageHikingTime: number;
+	averageDistance: number;
+	averageCalories: number;
+	trails: string[];
+}
+
+export interface RequestGetMonthlyClimbingTrackParams {
+	year: number;
+	month: number;
+}

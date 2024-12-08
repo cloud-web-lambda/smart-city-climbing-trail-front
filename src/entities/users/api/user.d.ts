@@ -12,3 +12,8 @@ export interface TokenDTO {
 	accessToken: string;
 	refreshToken: string;
 }
+
+export interface WeightDTO {
+	sub: string;
+	weight: number;
+}
