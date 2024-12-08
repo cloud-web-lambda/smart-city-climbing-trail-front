@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
+import { TrackPage } from "@/pages/track/ui";
+
 import { queries } from "@/features/common";
 
 import { TrackDTO } from "@/entities/climbing/api";
@@ -19,5 +21,5 @@ export const Route = createFileRoute("/_common/track/")({
 			};
 		});
 	},
-	component: () => <></>,
+	component: () => <TrackPage />,
 });

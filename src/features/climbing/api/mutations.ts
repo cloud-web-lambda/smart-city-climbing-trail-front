@@ -1,3 +1,7 @@
+import { useQueryClient } from "@tanstack/react-query";
+
+import { queries } from "@/features/common";
+
 import {
 	getClimbingTrailApi,
 	getDifferentClimbingTrailApi,
@@ -23,9 +27,15 @@ export const useGetDifferentClimbingTrailMutation = () =>
 	});
 
 /** 등산객의 등산기록을 저장 */
-export const useSaveClimbingTrackMutation = () =>
-	useToastMutation({
+export const useSaveClimbingTrackMutation = () => {
+	const queryClient = useQueryClient();
+
+	return useToastMutation({
 		hasErrorToast: true,
 		hasSuccessToast: false,
 		mutationFn: saveClimbingTrackApi,
+		onSuccess: async () => {
+			await queryClient.invalidateQueries({ queryKey: queries.climbing._def });
+		},
 	});
+};
