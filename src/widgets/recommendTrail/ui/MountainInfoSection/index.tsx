@@ -3,7 +3,7 @@ import Skeleton from "react-loading-skeleton";
 
 import { useGetMountainInfoSuspenseQuery } from "@/features/mountain/api/queries";
 
-import styles from "./MountainInfoSection.module.scss";
+import styles from "./mountainInfoSection.module.scss";
 
 interface Props {
 	trailName: string;
