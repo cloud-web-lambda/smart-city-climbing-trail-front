@@ -4,7 +4,7 @@
 $SPACE: 12px;
 
 .wrapper {
-	@include m.fixed(auto auto 40px 50%);
+	@include m.fixed(auto auto calc(c.$S_BOTTOM_NAVIGATION_HEIGHT + $SPACE) 50%);
 	z-index: c.$Z_TOAST;
 	transform: translateX(-50%);
 

@@ -4,8 +4,10 @@ import type {
 	RequestSignInDTO,
 	RequestSignUpDTO,
 	SignInDTO,
+	SignOutDTO,
 	SignUpDTO,
 } from "@/entities/auth/api/auth";
+import { authApiClient } from "@/entities/common/api";
 
 import { apiClient } from "@/shared/api";
 
@@ -18,3 +20,6 @@ export const signUpApi = (json: RequestSignUpDTO) => apiClient.post<SignUpDTO>("
 /** 회원가입 인증 코드 */
 export const confirmCodeApi = (json: RequestConfirmCodeDTO) =>
 	apiClient.post<ConfirmCodeDTO>("confirm", { json }).json();
+
+/** 로그아웃 */
+export const signOutApi = () => authApiClient.post<SignOutDTO>("sign-out").json();

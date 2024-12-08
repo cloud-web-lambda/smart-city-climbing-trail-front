@@ -38,3 +38,7 @@ export interface ConfirmCodeDTO {
 }
 
 export interface RefreshDTO extends Omit<SignInDTO, "message"> {}
+
+export interface SignOutDTO {
+	message: string;
+}

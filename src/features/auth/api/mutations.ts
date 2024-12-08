@@ -2,7 +2,7 @@ import { useNavigate } from "@tanstack/react-router";
 
 import { useMe } from "@/features/users/hooks";
 
-import { confirmCodeApi, signInApi, signUpApi } from "@/entities/auth/api";
+import { confirmCodeApi, signInApi, signOutApi, signUpApi } from "@/entities/auth/api";
 import { setEmail, setTokens } from "@/entities/users/lib";
 
 import { useToastMutation } from "@/shared/hooks";
@@ -47,3 +47,12 @@ export const useConfirmCodeMutation = () => {
 		},
 	});
 };
+
+/** 로그아웃 */
+export const useSignOutMutation = () =>
+	useToastMutation({
+		mutationFn: signOutApi,
+		hasErrorToast: true,
+		hasSuccessToast: true,
+		successKey: "message",
+	});
