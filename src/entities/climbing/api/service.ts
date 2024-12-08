@@ -1,6 +1,8 @@
 import type {
 	RequestGetClimbingTrailParams,
 	RequestGetDifferentClimbingTrailParams,
+	RequestSaveClimbingTrackBody,
+	SaveClimbingTrackDTO,
 	TrailDTO,
 } from "@/entities/climbing/api/climbing";
 import { authApiClient } from "@/entities/common/api";
@@ -14,3 +16,7 @@ export const getClimbingTrailApi = (params: RequestGetClimbingTrailParams) =>
 /** 같은 산의 다른 등산로 추천 */
 export const getDifferentClimbingTrailApi = (params: RequestGetDifferentClimbingTrailParams) =>
 	authApiClient.get<TrailDTO>("climbing/trail/different", { searchParams: getSearchParams(params) }).json();
+
+/** 등산객의 등산기록을 저장 */
+export const saveClimbingTrackApi = (json: RequestSaveClimbingTrackBody) =>
+	authApiClient.post<SaveClimbingTrackDTO>("climbing/track", { json }).json();

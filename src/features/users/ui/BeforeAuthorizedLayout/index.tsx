@@ -9,7 +9,7 @@ const BeforeAuthorizedLayout: React.FC<PropsWithChildren> = ({ children }) => {
 	const navigate = useNavigate();
 
 	useLayoutEffect(() => {
-		if (checkIsLogined(me)) navigate({ to: "/", replace: true });
+		if (checkIsLogined(me)) navigate({ to: "/home", replace: true });
 	}, [checkIsLogined, me, navigate]);
 
 	return <>{children}</>;

@@ -12,7 +12,7 @@ const BottomNavigation: React.FC = () => {
 					<IconArchive />
 					기록
 				</Link>
-				<Link to="/" className={styles.item} activeProps={{ className: styles.active }}>
+				<Link to="/home" className={styles.item} activeProps={{ className: styles.active }}>
 					<IconHome />홈
 				</Link>
 				<Link to="/my" className={styles.item} activeProps={{ className: styles.active }}>

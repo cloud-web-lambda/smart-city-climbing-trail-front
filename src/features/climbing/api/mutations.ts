@@ -1,4 +1,8 @@
-import { getClimbingTrailApi, getDifferentClimbingTrailApi } from "@/entities/climbing/api/service";
+import {
+	getClimbingTrailApi,
+	getDifferentClimbingTrailApi,
+	saveClimbingTrackApi,
+} from "@/entities/climbing/api/service";
 
 import { useToastMutation } from "@/shared/hooks";
 
@@ -16,4 +20,12 @@ export const useGetDifferentClimbingTrailMutation = () =>
 		hasErrorToast: true,
 		hasSuccessToast: false,
 		mutationFn: getDifferentClimbingTrailApi,
+	});
+
+/** 등산객의 등산기록을 저장 */
+export const useSaveClimbingTrackMutation = () =>
+	useToastMutation({
+		hasErrorToast: true,
+		hasSuccessToast: false,
+		mutationFn: saveClimbingTrackApi,
 	});

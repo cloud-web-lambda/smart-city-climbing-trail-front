@@ -16,7 +16,7 @@ const MountainInfoSection: React.FC<Props> = ({ trailName, className }) => {
 
 	return (
 		<section className={cx(styles.wrapper, className)}>
-			<h2 className={styles.title}>현재 위치의 실시간 기상 경보</h2>
+			<h2 className={styles.title}>{trailName}의 실시간 기상 경보</h2>
 			{weather.rainWarning && <p className={cx(styles.warning, styles.rain)}>비가올 수 있어요 ㅜㅜ</p>}
 			{weather.windWarning && <p className={cx(styles.warning, styles.wind)}>바람이 셀 수 있어요 ㅜㅜ</p>}
 			<dl>
@@ -52,7 +52,7 @@ export default MountainInfoSection;
 export const LoadingMountainInfoSection: React.FC<Props> = ({ className, trailName }) => {
 	return (
 		<section className={cx(styles.wrapper, className)}>
-			<h2 className={styles.title}>현재 위치의 실시간 기상 경보</h2>
+			<h2 className={styles.title}>{trailName}의 실시간 기상 경보</h2>
 			<dl>
 				<dt>온도</dt>
 				<Skeleton width={32} />

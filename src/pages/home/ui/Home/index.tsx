@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { LoadingMountainInfoSection, MountainInfoSection, RecommendTrailSection } from "@/widgets/recommendTrail/ui";
 
 import { useRecommendTrailStore } from "@/features/climbing/model";
-import { DifferentClimbingButton } from "@/features/climbing/ui";
+import { ConfirmTrailButton, DifferentClimbingButton } from "@/features/climbing/ui";
 
 import styles from "./homePage.module.scss";
 
@@ -17,7 +17,10 @@ const HomePage: React.FC = () => {
 			{trail && (
 				<Suspense fallback={<LoadingMountainInfoSection trailName={trail.trailName} />}>
 					<MountainInfoSection trailName={trail.trailName} />
-					<DifferentClimbingButton className={styles.differentClimbingButton} />
+					<div className={styles.buttonWrapper}>
+						<DifferentClimbingButton className={styles.differentClimbingButton} />
+						<ConfirmTrailButton />
+					</div>
 				</Suspense>
 			)}
 		</main>

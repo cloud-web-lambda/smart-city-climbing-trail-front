@@ -6,17 +6,18 @@
 
 	.title {
 		@include m.fontHeading1("semibold");
+		@include m.flex(flex-start);
+		gap: 12px;
 		color: var(--c-g-neutral-10);
 	}
 
-	.recommendTrailSection {
-		padding-top: 24px;
+	.trailName {
+		@include m.fontHeading1("semibold");
+		padding-top: 40px;
+		color: var(--c-bg-dark);
 	}
 
-	.buttonWrapper {
-		display: grid;
-		grid-template-columns: auto 1fr;
-		gap: 12px;
+	.button {
 		margin-top: 40px;
 	}
 }

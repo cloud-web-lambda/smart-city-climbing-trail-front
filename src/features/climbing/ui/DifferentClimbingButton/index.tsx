@@ -29,7 +29,7 @@ const DifferentClimbingButton: React.FC<Props> = ({ className }) => {
 	};
 
 	return (
-		<Button type="button" buttonType="secondary" full className={className} onClick={onClick}>
+		<Button type="button" buttonType="outlined" className={className} onClick={onClick}>
 			대체 등산로 추천
 		</Button>
 	);

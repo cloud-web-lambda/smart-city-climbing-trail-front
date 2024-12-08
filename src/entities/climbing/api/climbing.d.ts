@@ -2,6 +2,8 @@ import { DIFFICULTY } from "@/entities/climbing/constants";
 
 import type { Coordinates } from "@/shared/model";
 
+import type { Dayjs } from "dayjs";
+
 export type Difficulty = (typeof DIFFICULTY)[number];
 
 export interface RequestGetClimbingTrailParams extends Coordinates {
@@ -20,4 +22,16 @@ export interface TrailDTO {
 	/** 등산로의 난이도 */
 	difficulty: Difficulty;
 	coordinates: Coordinates;
+}
+
+export interface RequestSaveClimbingTrackBody {
+	trailName: string;
+	startDate: Dayjs | Date;
+	endDate: Dayjs | Date;
+	distance: number;
+}
+
+export interface SaveClimbingTrackDTO extends RequestSaveClimbingTrackBody {
+	sub: string;
+	calories: number;
 }
