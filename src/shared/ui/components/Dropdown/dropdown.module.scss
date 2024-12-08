@@ -1,0 +1,102 @@
+@use "@/shared/ui/styles/constants" as c;
+@use "@/shared/ui/styles/mixins" as m;
+
+$WIDTH: 200px;
+
+.wrapper {
+	position: relative;
+
+	.selectWrapper {
+		position: relative;
+		width: 100%;
+		padding: 10px 42px 10px 16px;
+		cursor: pointer;
+		background-color: var(--c-g-neutral-99);
+		border: 1px solid var(--c-primary);
+		border-radius: 8px;
+
+		.text {
+			@include m.fontLabel1Normal("regular");
+			color: var(--c-g-neutral-10);
+			white-space: nowrap;
+
+			&.placeholder {
+				opacity: 0.35;
+			}
+		}
+
+		.icon {
+			@include m.posCenterY;
+			right: 16px;
+
+			&.isPlaceholder {
+				opacity: 0.35;
+			}
+
+			&.isShow {
+				transform: rotate(180deg) translateY(50%);
+			}
+		}
+
+		&.disabled {
+			color: var(--c-g-neutral-70);
+			cursor: not-allowed;
+			border-color: var(--c-g-neutral-70);
+		}
+	}
+
+	.dropdown {
+		z-index: c.$Z_DROPDOWN;
+		width: $WIDTH;
+		max-height: 0;
+		padding: 0;
+		overflow: hidden;
+		overscroll-behavior: none;
+		background-color: var(--c-g-neutral-99);
+		border-radius: 8px;
+		box-shadow: var(--c-shadow-emphasize);
+		transition: all 0.2s ease-out;
+
+		> * + * {
+			display: inline-block;
+			width: 100%;
+			margin-top: 8px;
+		}
+
+		&.top {
+			@include m.absolute(auto auto calc(100% + 8px) 50%);
+			transform: translateX(-50%);
+		}
+
+		&.topLeft {
+			@include m.absolute(auto auto calc(100% + 8px) 0);
+		}
+
+		&.topRight {
+			@include m.absolute(auto 0 calc(100% + 8px) auto);
+		}
+
+		&.bottom {
+			@include m.absolute(calc(100% + 8px) auto auto 50%);
+			transform: translateX(-50%);
+		}
+
+		&.bottomLeft {
+			@include m.absolute(calc(100% + 8px) auto auto 0);
+		}
+
+		&.bottomRight {
+			@include m.absolute(calc(100% + 8px) 0 auto auto);
+		}
+
+		&.isShow {
+			max-height: var(--max-height);
+			padding: 16px 0;
+			overflow-y: scroll;
+		}
+
+		&.fitToChildrenWidth {
+			width: var(--width);
+		}
+	}
+}

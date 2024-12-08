@@ -1,14 +1,10 @@
 import ky from "ky";
 
 import type { RefreshDTO } from "@/entities/auth/api";
-import {
-	TOKEN_EXPIRED_EVENT_NAME,
-	TOKEN_EXPIRED_HTTP_MESSAGE,
-	TOKEN_EXPIRED_HTTP_STATUS,
-} from "@/entities/users/constants";
+import { TOKEN_EXPIRED_EVENT_NAME, TOKEN_EXPIRED_HTTP_STATUS } from "@/entities/users/constants";
 import { getAccessToken, getEmail, getTokens, removeTokens, setTokens } from "@/entities/users/lib";
 
-import { apiClient, getKyHTTPError, isKyHTTPError } from "@/shared/api";
+import { apiClient, isKyHTTPError } from "@/shared/api";
 import config from "@/shared/config";
 import { PromiseHolder } from "@/shared/lib";
 
@@ -25,21 +21,19 @@ export const authApiClient = apiClient.extend({
 				if (!accessToken) abortController.abort();
 				else request.headers.set("Authorization", `Bearer ${accessToken}`);
 
-				return { ...request, signal: abortController.signal };
+				return new Request(request, { signal: abortController.signal });
 			},
 		],
 		beforeError: [
 			async (error) => {
 				if (!isKyHTTPError(error)) return error;
 				const { status } = error.response;
-				const { message } = await getKyHTTPError(error);
-				if (status !== TOKEN_EXPIRED_HTTP_STATUS || message !== TOKEN_EXPIRED_HTTP_MESSAGE) return error;
+				if (status !== TOKEN_EXPIRED_HTTP_STATUS) return error;
 
 				try {
 					const { accessToken, refreshToken } = getTokens();
 					const email = getEmail();
 					if (!accessToken || !refreshToken || !email) throw new Error();
-
 					if (promiseHolder.isLocked) await promiseHolder.promise;
 					promiseHolder.hold();
 
@@ -56,7 +50,6 @@ export const authApiClient = apiClient.extend({
 				} catch {
 					promiseHolder.failRelease();
 					removeTokens();
-					// TODO: handle token expired event
 					void window.dispatchEvent(new CustomEvent(TOKEN_EXPIRED_EVENT_NAME));
 				}
 

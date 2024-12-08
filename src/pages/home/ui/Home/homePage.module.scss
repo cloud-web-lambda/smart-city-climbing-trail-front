@@ -1,0 +1,19 @@
+@use "@/shared/ui/styles/constants" as c;
+@use "@/shared/ui/styles/mixins" as m;
+
+.wrapper {
+	width: 100%;
+
+	.title {
+		@include m.fontHeading1("semibold");
+		color: var(--c-g-neutral-10);
+	}
+
+	.recommendTrailSection {
+		padding-top: 24px;
+	}
+
+	.differentClimbingButton {
+		margin-top: 40px;
+	}
+}

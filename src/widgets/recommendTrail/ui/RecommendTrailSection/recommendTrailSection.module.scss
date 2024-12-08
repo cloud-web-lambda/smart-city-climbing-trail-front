@@ -1,0 +1,27 @@
+@use "@/shared/ui/styles/constants" as c;
+@use "@/shared/ui/styles/mixins" as m;
+
+.wrapper {
+	width: 100%;
+
+	.menu {
+		@include m.flex;
+		gap: 12px;
+		width: 100%;
+	}
+
+	.result {
+		width: 100%;
+		margin-top: 40px;
+
+		.trailName {
+			@include m.fontHeading1("semibold");
+			color: var(--c-g-neutral-10);
+		}
+
+		.distance {
+			@include m.fontLabel2("regular");
+			color: var(--c-g-neutral-40);
+		}
+	}
+}

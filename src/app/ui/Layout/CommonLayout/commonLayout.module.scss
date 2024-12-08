@@ -3,4 +3,6 @@
 
 .wrapper {
 	width: 100%;
+	padding: 24px;
+	padding-bottom: calc(c.$S_BOTTOM_NAVIGATION_HEIGHT + 24px);
 }

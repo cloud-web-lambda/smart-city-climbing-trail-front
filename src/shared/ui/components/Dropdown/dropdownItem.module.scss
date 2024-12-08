@@ -1,0 +1,22 @@
+@use "@/shared/ui/styles/constants" as c;
+@use "@/shared/ui/styles/mixins" as m;
+
+.wrapper {
+	width: 100%;
+	border-radius: 8px;
+
+	> button {
+		@include m.fontLabel1Normal;
+		@include m.makeEllipsis;
+		position: relative;
+		width: 100%;
+		padding: 6px 16px;
+		color: var(--c-g-neutral-10);
+		text-align: left;
+		border-radius: inherit;
+
+		&:disabled {
+			color: var(--c-g-neutral-70);
+		}
+	}
+}

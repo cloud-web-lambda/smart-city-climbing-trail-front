@@ -1,0 +1,44 @@
+@use "@/shared/ui/styles/constants" as c;
+@use "@/shared/ui/styles/mixins" as m;
+
+.wrapper {
+	width: 100%;
+
+	.title {
+		@include m.fontHeading2("semibold");
+		padding-top: 24px;
+		color: var(--c-g-neutral-10);
+	}
+
+	.warning {
+		@include m.fontBody1Normal("semibold");
+		padding: 8px 0;
+
+		&.rain {
+			color: var(--c-info);
+		}
+
+		&.wind {
+			color: var(--c-autumn);
+		}
+	}
+
+	dl {
+		@include m.flex;
+		display: grid;
+		grid-template-columns: 120px 1fr;
+		gap: 12px;
+		width: 100%;
+		padding: 12px 0;
+
+		dt {
+			@include m.fontLabel1Normal("regular");
+			color: var(--c-g-cool-neutral-15);
+		}
+
+		dd {
+			@include m.fontBody1Normal("regular");
+			color: var(--c-g-cool-neutral-5);
+		}
+	}
+}
