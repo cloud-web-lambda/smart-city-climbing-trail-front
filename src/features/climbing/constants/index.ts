@@ -1,1 +1,1 @@
-export { TRAIL_NAME_KEY, TRAIL_START_DATE_KEY } from "./storage";
+export { TRACK_STORE_KEY } from "./storage";

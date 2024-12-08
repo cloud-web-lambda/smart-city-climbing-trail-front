@@ -15,7 +15,12 @@ const BottomNavigation: React.FC = () => {
 				<Link to="/home" className={styles.item} activeProps={{ className: styles.active }}>
 					<IconHome />홈
 				</Link>
-				<Link to="/my" className={styles.item} activeProps={{ className: styles.active }}>
+				<Link
+					to="/my"
+					search={{ isEditWeight: false }}
+					className={styles.item}
+					activeProps={{ className: styles.active }}
+				>
 					<IconProfile />
 					프로필
 				</Link>

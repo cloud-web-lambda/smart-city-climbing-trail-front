@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-import { TRACK_STORE_KEY } from "@/features/climbing/constants/storage";
+import { TRACK_STORE_KEY } from "@/features/climbing/constants";
 
 import type { RequestSaveClimbingTrackBody } from "@/entities/climbing/api";
 
