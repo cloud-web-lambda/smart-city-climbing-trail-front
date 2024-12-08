@@ -27,7 +27,7 @@ const useMe = (): ReturnUseMe => {
 	}, []);
 
 	const refetchMe = useCallback(async () => {
-		queryClient.removeQueries({ queryKey: queries.users.getMe.queryKey });
+		await queryClient.refetchQueries(queries.users.getMe);
 		await router.invalidate();
 	}, [queryClient, router]);
 

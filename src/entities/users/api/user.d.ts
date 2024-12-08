@@ -15,5 +15,9 @@ export interface TokenDTO {
 
 export interface WeightDTO {
 	sub: string;
-	weight: number;
+	weight: number | null;
+}
+
+export interface RequestSaveMyWeightBody {
+	weight: string;
 }

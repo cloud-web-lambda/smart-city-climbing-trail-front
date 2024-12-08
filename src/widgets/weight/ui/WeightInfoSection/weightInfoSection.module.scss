@@ -1,0 +1,28 @@
+@use "@/shared/ui/styles/constants" as c;
+@use "@/shared/ui/styles/mixins" as m;
+
+.wrapper {
+	display: grid;
+	grid-template-rows: auto auto;
+	grid-template-columns: 1fr auto;
+	column-gap: 12px;
+	width: 100%;
+	margin-bottom: 40px;
+
+	.title {
+		@include m.fontHeadline2;
+		grid-area: 1 / 1 / 2 / 2;
+		color: var(--c-g-neutral-20);
+	}
+
+	.weight {
+		@include m.fontBody1Normal("regular");
+		grid-area: 2 / 1 / 3 / 2;
+		color: var(--c-g-cool-neutral-22);
+	}
+
+	.editButton {
+		@include m.flex;
+		grid-area: 1 / 2 / 3 / 3;
+	}
+}
