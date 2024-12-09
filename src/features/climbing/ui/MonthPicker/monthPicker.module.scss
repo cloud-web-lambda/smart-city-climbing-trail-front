@@ -1,0 +1,70 @@
+@use "@/shared/ui/styles/constants" as c;
+@use "@/shared/ui/styles/mixins" as m;
+
+.wrapper {
+	position: relative;
+
+	.monthInput {
+		@include m.flex;
+		@include m.fontBody1Normal("regular");
+		gap: 4px;
+		width: max-content;
+		padding: 8px 12px;
+		color: var(--c-g-cool-neutral-10);
+		cursor: pointer;
+		background-color: var(--c-g-cool-neutral-99);
+		border: 1px solid var(--c-primary);
+		border-radius: 8px;
+
+		&.isShow {
+			.chevron {
+				transform: rotate(180deg);
+			}
+		}
+	}
+
+	.monthPicker {
+		@include m.absolute(calc(100% + 8px) auto auto 0);
+		z-index: c.$Z_MONTH_PICKER;
+		padding: 12px;
+		background-color: var(--c-g-cool-neutral-99-1);
+		border-radius: 8px;
+
+		.monthPickerHeader {
+			@include m.flex(space-between);
+			margin-bottom: 8px;
+
+			.left {
+				transform: rotate(180deg);
+			}
+		}
+
+		.monthList {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 4px;
+
+			.itemWrapper {
+				@include m.flex;
+				padding: 0;
+				border: 1px solid var(--c-g-cool-neutral-60);
+				border-radius: 8px;
+
+				.item {
+					@include m.fontCaption1("regular");
+					position: relative;
+					padding: 12px 24px;
+					border-radius: inherit;
+				}
+
+				&.active {
+					background-color: var(--c-elevation-mid);
+
+					.item {
+						@include m.fontCaption1("bold");
+					}
+				}
+			}
+		}
+	}
+}
