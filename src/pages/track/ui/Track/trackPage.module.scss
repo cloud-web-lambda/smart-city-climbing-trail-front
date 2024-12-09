@@ -3,4 +3,15 @@
 
 .wrapper {
 	width: 100%;
+
+	.title {
+		@include m.fontHeading1("semibold");
+		color: var(--c-g-neutral-10);
+	}
+
+	.linkWrapper {
+		@include m.flex(flex-end);
+		width: 100%;
+		padding: 16px 0;
+	}
 }

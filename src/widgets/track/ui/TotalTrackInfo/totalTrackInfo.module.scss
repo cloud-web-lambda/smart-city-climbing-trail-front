@@ -1,0 +1,24 @@
+@use "@/shared/ui/styles/constants" as c;
+@use "@/shared/ui/styles/mixins" as m;
+
+.wrapper {
+	width: 100%;
+
+	dl {
+		@include m.flex(flex-start, flex-start, column);
+		width: 100%;
+		padding: 12px 0;
+
+		dt {
+			@include m.fontLabel1Normal("regular");
+			margin-bottom: 4px;
+			color: var(--c-g-cool-neutral-15);
+		}
+
+		dd {
+			@include m.fontBody1Normal("regular");
+			margin-bottom: 12px;
+			color: var(--c-g-cool-neutral-5);
+		}
+	}
+}

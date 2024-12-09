@@ -1,6 +1,13 @@
+import { Suspense } from "react";
+
 import { useSearch } from "@tanstack/react-router";
 
-import { EditWeightInfoSection, WeightInfoSection } from "@/widgets/weight/ui";
+import {
+	EditWeightInfoSection,
+	LoadingEditWeightInfoSection,
+	LoadingWeightInfoSection,
+	WeightInfoSection,
+} from "@/widgets/weight/ui";
 
 import { useMe } from "@/features/users/hooks";
 
@@ -17,8 +24,16 @@ const MyPage: React.FC = () => {
 			<h1 className={styles.title}>프로필</h1>
 			<h2 className={styles.emailTitle}>이메일</h2>
 			<address className={styles.email}>{me.email}</address>
-			{!isEditWeight && <WeightInfoSection />}
-			{isEditWeight && <EditWeightInfoSection />}
+			{!isEditWeight && (
+				<Suspense fallback={<LoadingWeightInfoSection />}>
+					<WeightInfoSection />
+				</Suspense>
+			)}
+			{isEditWeight && (
+				<Suspense fallback={<LoadingEditWeightInfoSection />}>
+					<EditWeightInfoSection />
+				</Suspense>
+			)}
 			<button type="button" onClick={onLogout} className={styles.logoutButton}>
 				로그아웃
 			</button>
