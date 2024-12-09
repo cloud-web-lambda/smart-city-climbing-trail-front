@@ -15,7 +15,6 @@ import type { QueryClient } from "@tanstack/react-query";
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
 	loader: async ({ context: { queryClient } }) => {
-		console.log("here.");
 		return await queryClient.ensureQueryData(queries.users.getMe).catch<UnLoginedMeDTO>(() => {
 			return {};
 		});

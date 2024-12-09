@@ -16,11 +16,12 @@ import { Route as rootRoute } from "./app/routes/__root";
 import { Route as CommonRouteImport } from "./app/routes/_common/route";
 import { Route as AuthRouteImport } from "./app/routes/_auth/route";
 import { Route as CommonMyImport } from "./app/routes/_common/my";
-import { Route as CommonTrackIndexImport } from "./app/routes/_common/track/index";
+import { Route as CommonTrackMonthlyImport } from "./app/routes/_common/track/monthly";
 
 // Create Virtual Routes
 
 const CommonIndexLazyImport = createFileRoute("/_common/")();
+const CommonTrackIndexLazyImport = createFileRoute("/_common/track/")();
 const CommonHomeIndexLazyImport = createFileRoute("/_common/home/")();
 const AuthAuthIndexLazyImport = createFileRoute("/_auth/auth/")();
 const CommonHomeNewTrackLazyImport = createFileRoute("/_common/home/new-track")();
@@ -50,6 +51,12 @@ const CommonMyRoute = CommonMyImport.update({
 	getParentRoute: () => CommonRouteRoute,
 } as any);
 
+const CommonTrackIndexLazyRoute = CommonTrackIndexLazyImport.update({
+	id: "/track/",
+	path: "/track/",
+	getParentRoute: () => CommonRouteRoute,
+} as any).lazy(() => import("./app/routes/_common/track/index.lazy").then((d) => d.Route));
+
 const CommonHomeIndexLazyRoute = CommonHomeIndexLazyImport.update({
 	id: "/home/",
 	path: "/home/",
@@ -62,12 +69,6 @@ const AuthAuthIndexLazyRoute = AuthAuthIndexLazyImport.update({
 	getParentRoute: () => AuthRouteRoute,
 } as any).lazy(() => import("./app/routes/_auth/auth/index.lazy").then((d) => d.Route));
 
-const CommonTrackIndexRoute = CommonTrackIndexImport.update({
-	id: "/track/",
-	path: "/track/",
-	getParentRoute: () => CommonRouteRoute,
-} as any);
-
 const CommonHomeNewTrackLazyRoute = CommonHomeNewTrackLazyImport.update({
 	id: "/home/new-track",
 	path: "/home/new-track",
@@ -79,6 +80,12 @@ const AuthAuthSignUpLazyRoute = AuthAuthSignUpLazyImport.update({
 	path: "/auth/sign-up",
 	getParentRoute: () => AuthRouteRoute,
 } as any).lazy(() => import("./app/routes/_auth/auth/sign-up.lazy").then((d) => d.Route));
+
+const CommonTrackMonthlyRoute = CommonTrackMonthlyImport.update({
+	id: "/track/monthly",
+	path: "/track/monthly",
+	getParentRoute: () => CommonRouteRoute,
+} as any);
 
 // Populate the FileRoutesByPath interface
 
@@ -112,6 +119,13 @@ declare module "@tanstack/react-router" {
 			preLoaderRoute: typeof CommonIndexLazyImport;
 			parentRoute: typeof CommonRouteImport;
 		};
+		"/_common/track/monthly": {
+			id: "/_common/track/monthly";
+			path: "/track/monthly";
+			fullPath: "/track/monthly";
+			preLoaderRoute: typeof CommonTrackMonthlyImport;
+			parentRoute: typeof CommonRouteImport;
+		};
 		"/_auth/auth/sign-up": {
 			id: "/_auth/auth/sign-up";
 			path: "/auth/sign-up";
@@ -126,13 +140,6 @@ declare module "@tanstack/react-router" {
 			preLoaderRoute: typeof CommonHomeNewTrackLazyImport;
 			parentRoute: typeof CommonRouteImport;
 		};
-		"/_common/track/": {
-			id: "/_common/track/";
-			path: "/track";
-			fullPath: "/track";
-			preLoaderRoute: typeof CommonTrackIndexImport;
-			parentRoute: typeof CommonRouteImport;
-		};
 		"/_auth/auth/": {
 			id: "/_auth/auth/";
 			path: "/auth";
@@ -145,6 +152,13 @@ declare module "@tanstack/react-router" {
 			path: "/home";
 			fullPath: "/home";
 			preLoaderRoute: typeof CommonHomeIndexLazyImport;
+			parentRoute: typeof CommonRouteImport;
+		};
+		"/_common/track/": {
+			id: "/_common/track/";
+			path: "/track";
+			fullPath: "/track";
+			preLoaderRoute: typeof CommonTrackIndexLazyImport;
 			parentRoute: typeof CommonRouteImport;
 		};
 	}
@@ -167,17 +181,19 @@ const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(AuthRouteRout
 interface CommonRouteRouteChildren {
 	CommonMyRoute: typeof CommonMyRoute;
 	CommonIndexLazyRoute: typeof CommonIndexLazyRoute;
+	CommonTrackMonthlyRoute: typeof CommonTrackMonthlyRoute;
 	CommonHomeNewTrackLazyRoute: typeof CommonHomeNewTrackLazyRoute;
-	CommonTrackIndexRoute: typeof CommonTrackIndexRoute;
 	CommonHomeIndexLazyRoute: typeof CommonHomeIndexLazyRoute;
+	CommonTrackIndexLazyRoute: typeof CommonTrackIndexLazyRoute;
 }
 
 const CommonRouteRouteChildren: CommonRouteRouteChildren = {
 	CommonMyRoute: CommonMyRoute,
 	CommonIndexLazyRoute: CommonIndexLazyRoute,
+	CommonTrackMonthlyRoute: CommonTrackMonthlyRoute,
 	CommonHomeNewTrackLazyRoute: CommonHomeNewTrackLazyRoute,
-	CommonTrackIndexRoute: CommonTrackIndexRoute,
 	CommonHomeIndexLazyRoute: CommonHomeIndexLazyRoute,
+	CommonTrackIndexLazyRoute: CommonTrackIndexLazyRoute,
 };
 
 const CommonRouteRouteWithChildren = CommonRouteRoute._addFileChildren(CommonRouteRouteChildren);
@@ -186,22 +202,24 @@ export interface FileRoutesByFullPath {
 	"": typeof CommonRouteRouteWithChildren;
 	"/my": typeof CommonMyRoute;
 	"/": typeof CommonIndexLazyRoute;
+	"/track/monthly": typeof CommonTrackMonthlyRoute;
 	"/auth/sign-up": typeof AuthAuthSignUpLazyRoute;
 	"/home/new-track": typeof CommonHomeNewTrackLazyRoute;
-	"/track": typeof CommonTrackIndexRoute;
 	"/auth": typeof AuthAuthIndexLazyRoute;
 	"/home": typeof CommonHomeIndexLazyRoute;
+	"/track": typeof CommonTrackIndexLazyRoute;
 }
 
 export interface FileRoutesByTo {
 	"": typeof AuthRouteRouteWithChildren;
 	"/my": typeof CommonMyRoute;
 	"/": typeof CommonIndexLazyRoute;
+	"/track/monthly": typeof CommonTrackMonthlyRoute;
 	"/auth/sign-up": typeof AuthAuthSignUpLazyRoute;
 	"/home/new-track": typeof CommonHomeNewTrackLazyRoute;
-	"/track": typeof CommonTrackIndexRoute;
 	"/auth": typeof AuthAuthIndexLazyRoute;
 	"/home": typeof CommonHomeIndexLazyRoute;
+	"/track": typeof CommonTrackIndexLazyRoute;
 }
 
 export interface FileRoutesById {
@@ -210,29 +228,31 @@ export interface FileRoutesById {
 	"/_common": typeof CommonRouteRouteWithChildren;
 	"/_common/my": typeof CommonMyRoute;
 	"/_common/": typeof CommonIndexLazyRoute;
+	"/_common/track/monthly": typeof CommonTrackMonthlyRoute;
 	"/_auth/auth/sign-up": typeof AuthAuthSignUpLazyRoute;
 	"/_common/home/new-track": typeof CommonHomeNewTrackLazyRoute;
-	"/_common/track/": typeof CommonTrackIndexRoute;
 	"/_auth/auth/": typeof AuthAuthIndexLazyRoute;
 	"/_common/home/": typeof CommonHomeIndexLazyRoute;
+	"/_common/track/": typeof CommonTrackIndexLazyRoute;
 }
 
 export interface FileRouteTypes {
 	fileRoutesByFullPath: FileRoutesByFullPath;
-	fullPaths: "" | "/my" | "/" | "/auth/sign-up" | "/home/new-track" | "/track" | "/auth" | "/home";
+	fullPaths: "" | "/my" | "/" | "/track/monthly" | "/auth/sign-up" | "/home/new-track" | "/auth" | "/home" | "/track";
 	fileRoutesByTo: FileRoutesByTo;
-	to: "" | "/my" | "/" | "/auth/sign-up" | "/home/new-track" | "/track" | "/auth" | "/home";
+	to: "" | "/my" | "/" | "/track/monthly" | "/auth/sign-up" | "/home/new-track" | "/auth" | "/home" | "/track";
 	id:
 		| "__root__"
 		| "/_auth"
 		| "/_common"
 		| "/_common/my"
 		| "/_common/"
+		| "/_common/track/monthly"
 		| "/_auth/auth/sign-up"
 		| "/_common/home/new-track"
-		| "/_common/track/"
 		| "/_auth/auth/"
-		| "/_common/home/";
+		| "/_common/home/"
+		| "/_common/track/";
 	fileRoutesById: FileRoutesById;
 }
 
@@ -270,9 +290,10 @@ export const routeTree = rootRoute._addFileChildren(rootRouteChildren)._addFileT
       "children": [
         "/_common/my",
         "/_common/",
+        "/_common/track/monthly",
         "/_common/home/new-track",
-        "/_common/track/",
-        "/_common/home/"
+        "/_common/home/",
+        "/_common/track/"
       ]
     },
     "/_common/my": {
@@ -283,6 +304,10 @@ export const routeTree = rootRoute._addFileChildren(rootRouteChildren)._addFileT
       "filePath": "_common/index.lazy.tsx",
       "parent": "/_common"
     },
+    "/_common/track/monthly": {
+      "filePath": "_common/track/monthly.tsx",
+      "parent": "/_common"
+    },
     "/_auth/auth/sign-up": {
       "filePath": "_auth/auth/sign-up.lazy.tsx",
       "parent": "/_auth"
@@ -291,16 +316,16 @@ export const routeTree = rootRoute._addFileChildren(rootRouteChildren)._addFileT
       "filePath": "_common/home/new-track.lazy.tsx",
       "parent": "/_common"
     },
-    "/_common/track/": {
-      "filePath": "_common/track/index.tsx",
-      "parent": "/_common"
-    },
     "/_auth/auth/": {
       "filePath": "_auth/auth/index.lazy.tsx",
       "parent": "/_auth"
     },
     "/_common/home/": {
       "filePath": "_common/home/index.lazy.tsx",
+      "parent": "/_common"
+    },
+    "/_common/track/": {
+      "filePath": "_common/track/index.lazy.tsx",
       "parent": "/_common"
     }
   }
