@@ -12,6 +12,8 @@ const AfterAuthorizedLayout: React.FC<PropsWithChildren> = ({ children }) => {
 		if (!checkIsLogined(me)) navigate({ to: "/auth", replace: true });
 	}, [checkIsLogined, me, navigate]);
 
+	if (!checkIsLogined(me)) return null;
+
 	return <>{children}</>;
 };
 

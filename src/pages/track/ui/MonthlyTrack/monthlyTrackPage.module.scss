@@ -5,8 +5,14 @@
 	width: 100%;
 
 	.title {
+		@include m.flex(flex-start);
 		@include m.fontHeading1("semibold");
+		gap: 12px;
 		color: var(--c-g-neutral-10);
+
+		.back {
+			@include m.flex;
+		}
 	}
 
 	.linkWrapper {
