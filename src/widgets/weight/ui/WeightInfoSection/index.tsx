@@ -29,7 +29,8 @@ export const LoadingWeightInfoSection: React.FC = () => {
 	return (
 		<section className={styles.wrapper}>
 			<h2 className={styles.title}>몸무게</h2>
-			<Skeleton width={32} height={24} />
+			<Skeleton width={32} height={24} containerClassName={styles.weight} />
+			<Skeleton width={32} height={24} containerClassName={styles.editButton} />
 		</section>
 	);
 };
