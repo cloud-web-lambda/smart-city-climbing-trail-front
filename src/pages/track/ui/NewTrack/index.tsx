@@ -5,6 +5,7 @@ import { useTrackStore } from "@/features/climbing/model";
 import { useGetNearbySubwayMutation } from "@/features/subways/api";
 
 import { calculateTimeDifference, dayjs, formatTimeDifference, getGPSLocation } from "@/shared/lib";
+import { checkIsGPSLocationError } from "@/shared/lib/gps";
 import { IconArrowLeftLarge } from "@/shared/ui/assets/icons/arrow";
 import { Button, useToast } from "@/shared/ui/components";
 
@@ -38,9 +39,15 @@ const NewTrackPage: React.FC = () => {
 
 	const handleNearbySubway = useCallback(async () => {
 		if (!track?.endDate) return;
-		const { lat, lng } = await getGPSLocation();
-		await getNearbySubway({ lat, lng });
-	}, [getNearbySubway, track?.endDate]);
+		try {
+			const { lat, lng } = await getGPSLocation();
+			await getNearbySubway({ lat, lng });
+		} catch (err) {
+			if (checkIsGPSLocationError(err)) {
+				addToast({ message: err.message, state: "negative" });
+			}
+		}
+	}, [addToast, getNearbySubway, track?.endDate]);
 
 	useEffect(() => {
 		handleNearbySubway();
