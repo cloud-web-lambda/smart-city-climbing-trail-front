@@ -21,7 +21,7 @@ export const getDifferentClimbingTrailApi = (params: RequestGetDifferentClimbing
 
 /** 등산객의 등산기록을 저장 */
 export const saveClimbingTrackApi = (json: RequestSaveClimbingTrackBody) =>
-	authApiClient.post<SaveClimbingTrackDTO>("climbing/track", { json }).json();
+	authApiClient.post<SaveClimbingTrackDTO>("climbing/track/new", { json }).json();
 
 /** 등산객의 전체 등산기록 조회 */
 export const getClimbingTrackApi = () => authApiClient.get<TrackDTO>("climbing/track").json();
