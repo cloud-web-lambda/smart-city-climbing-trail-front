@@ -17,7 +17,7 @@ export const getGPSLocation = () => {
 			(position) => {
 				res({ lat: position.coords.latitude.toString(), lng: position.coords.longitude.toString() });
 			},
-			(err) => rej({ message: err }),
+			() => rej({ message: "위치 정보 권한을 허용해주세요." }),
 			{ enableHighAccuracy: true, maximumAge: 2_000, timeout: 5_000 },
 		);
 	});

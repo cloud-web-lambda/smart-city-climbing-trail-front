@@ -6,6 +6,7 @@ import config from "@/shared/config";
 export const apiClient = ky.create({
 	prefixUrl: config.API_URL,
 	retry: 0,
+	timeout: false,
 });
 
 export const isKyHTTPError = (error: unknown): error is HTTPError<ErrorDTO> => {
